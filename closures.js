@@ -22,13 +22,13 @@ function outer() {
   Invoke outer saving the return value into another variable called 'inner'.
 */
   
-// Code Here
+let inner = outer();
 
 
 
 //Once you do that, invoke inner.
 
-//Code Here
+inner();
 
 
 
@@ -51,8 +51,9 @@ function callFriend(name) {
   (HINT: You will need to pass in arguments to both function invocations)
 */
 
-//Code Here
+let callJake = callFriend("Jake");
 
+callJake("435-555-9248");
 
 
 ////////// PROBLEM 3 //////////
@@ -61,9 +62,13 @@ function callFriend(name) {
   Write a function called makeCounter that makes the following code work properly.
 */
 
-//Code Here
-
-
+function makeCounter(){
+  let num = 0;
+  function plusOne(){
+    return num += 1;
+  }
+  return plusOne;
+}
 
 //Uncomment this once you make your function
 //   var count = makeCounter();
@@ -85,13 +90,22 @@ function callFriend(name) {
   http://stackoverflow.com/questions/17776940/javascript-module-pattern-with-example?answertab=votes#tab-top
 */
 
-function counterFactory(value) {
-  // Code here.
+function counterFactory(value){
+  let num = value;
 
-  return {
-
-  };
+  let inc = function(){
+    return num += 1;
+  }
+  let dec = function(){
+    return num -= 1;
+  }
+    return {inc, dec}
 }
+
+    return{
+
+};
+
 
 counter = counterFactory(10);
 // counter.inc() // 11
@@ -109,18 +123,19 @@ counter = counterFactory(10);
   (Hint: don't forget to have a space between the firstname and lastname and a period at the end of the sentence.)
 */
 
-function motivation( firstname, lastname ) {
+function motivation(firstname, lastname){
   var welcomeText = "You're doing awesome, keep it up";
-
+  let firstName = firstname;
+  let lastName = lastname;
   // code message function here.
-
+  function message(){
+    return "${welcomeText} ${firstName} ${lastName}"
+  }
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
-var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
-
-
+var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.'
 
 ////////// PROBLEM 6 //////////
 
@@ -143,7 +158,9 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
-    // Code here.
+    publicMethod(){
+      return privateMethod();
+    }
   };
 })();
 
@@ -158,11 +175,16 @@ var module = (function() {
   takeAwayFromSecret should have a parameter that takes away from the secret number returning the updated secret number.
 */
 
-function secretNumber() {
+function secretNumber(){
   var secret = 143;
 
-  return {
-    // Code here
+  return{
+    addToSecret(num){
+      return secret += num
+    },
+    takeAwayFromSecret(num){
+      return secret -= num
+    }
   };
 }
 
